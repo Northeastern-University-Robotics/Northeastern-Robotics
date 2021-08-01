@@ -1,2 +1,2 @@
-#Northeastern Robotics\
-Northeastern University's official robotics club repository\
+# Northeastern Robotics
+Northeastern University's official robotics club repository 
