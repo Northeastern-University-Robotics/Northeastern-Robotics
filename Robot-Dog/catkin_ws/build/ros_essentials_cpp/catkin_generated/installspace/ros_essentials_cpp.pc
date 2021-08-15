@@ -1,0 +1,8 @@
+prefix=/home/owltesthq/Northeastern-Robotics/Robot-Dog/catkin_ws/install
+
+Name: ros_essentials_cpp
+Description: Description of ros_essentials_cpp
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lros_essentials_cpp
+Requires: roscpp rospy std_msgs message_runtime
