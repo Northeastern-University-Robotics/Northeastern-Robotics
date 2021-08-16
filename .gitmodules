@@ -1,6 +1,0 @@
-[submodule "Robot-Dog/backend/pyweb"]
-	path = Robot-Dog/backend/pyweb
-	url = https://github.com/hnasr/pyweb
-[submodule "Robot-Dog/frontend/Android-Socket-Programming"]
-	path = Robot-Dog/frontend/Android-Socket-Programming
-	url = git@github.com:wizzywit/Android-Socket-Programming.git
