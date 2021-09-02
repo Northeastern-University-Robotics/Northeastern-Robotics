@@ -1,0 +1,8 @@
+prefix=/home/owltesthq/Northeastern-Robotics/Robot-Dog/catkin_ws/devel
+
+Name: Jared
+Description: Description of Jared
+Version: 0.0.0
+Cflags: -I/home/owltesthq/Northeastern-Robotics/Robot-Dog/catkin_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime
