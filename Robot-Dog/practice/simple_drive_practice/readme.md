@@ -1,6 +1,6 @@
 INSTALLATION/CONFIG:
 Copy this ENTIRE folder into your catkin_ws/src
-	- Click on simple_drive_practice tab in google drive, then click download
+	- git clone the repo
 
 From the root of your catkin workspace (/catkin_ws/), install all deps
 	- rosdep install -i --from-path src --rosdistro noetic -y
@@ -17,7 +17,7 @@ Run chmod +x sample_script_lvov.py in simple_drive_practice/scripts
 Then the example script should run with rosrun simple_drive_practice sample_script_lvov.py when the sim is running
 
 RUNNING SCRIPTS:
-Either make your python scripts executable via command line (chmod +x {NAMEOFSCRIPTHERE}.py)
+Either make your python scripts executable via command line (chmod +x {NAMEOFSCRIPTHERE}.py from simple_drive_practice/scripts)
 
 OR add them to the CMakeLists
 	- You will need to add all C++ scripts to the CMakeLists, and run catkin_make for every change
