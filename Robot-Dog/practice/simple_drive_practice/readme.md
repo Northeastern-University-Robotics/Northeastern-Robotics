@@ -1,6 +1,6 @@
 INSTALLATION/CONFIG:
 Copy this ENTIRE folder into your catkin_ws/src
-	- git clone the Gary branch of the repo
+	- git clone the repo
 
 From the root of your catkin workspace (/catkin_ws/), install all deps
 	- rosdep install -i --from-path src --rosdistro noetic -y
