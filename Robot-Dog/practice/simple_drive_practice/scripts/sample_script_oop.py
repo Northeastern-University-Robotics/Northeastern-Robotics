@@ -11,11 +11,11 @@ class HallwayNav():
         self.simplified_scan = [0, 0, 0, 0, 0]
 
     def range_callback(self, msg):
-        self.rangeAhead = msg.ranges[int(len(msg.ranges) / 2)]
-        self.maxRange = max(msg.ranges)
-        self.minRange = min(msg.ranges)
-        self.right = msg.ranges[0]
-        self.left = msg.ranges[len(msg.ranges) - 1]
+        self.simplified_scan[0] = msg.ranges[int(len(msg.ranges) / 2)]
+        self.simplified_scan[1] = max(msg.ranges)
+        self.simplified_scan[2] = min(msg.ranges)
+        self.simplified_scan[3] = msg.ranges[0]
+        self.simplified_scan[4] = msg.ranges[len(msg.ranges) - 1]
 
     def navigate(self):
         while not (rospy.is_shutdown()):
