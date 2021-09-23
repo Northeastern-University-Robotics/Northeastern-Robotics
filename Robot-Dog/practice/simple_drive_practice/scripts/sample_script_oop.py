@@ -9,6 +9,7 @@ class HallwayNav():
         self.twist_pub = rospy.Publisher('simple_skid_steer/cmd_vel', Twist, queue_size = 10)
         self.vel = Twist()
         self.simplified_scan = [0, 0, 0, 0, 0]
+        self.navigate()
 
     def range_callback(self, msg):
         self.simplified_scan[0] = msg.ranges[int(len(msg.ranges) / 2)]
