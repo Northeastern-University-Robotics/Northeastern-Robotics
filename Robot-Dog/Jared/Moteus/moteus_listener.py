@@ -1,15 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # license removed for brevity
 
 
 from asyncio import queues
 import rospy
 import moteus
+import moteus_pi3hat
 from std_msgs.msg import String
 import asyncio
 from threading import Thread
 import math
-from sensor_msgs.msg import JointState
+#from sensor_msgs.msg import JointState
 from Jared.msg import simpleMoteus
 
 exitFlag = False
@@ -48,25 +49,53 @@ def moteusMain(threadName):
     asyncio.set_event_loop(loop)
 
     async def onClose(c:moteus.Controller=None):
+        print("Done")
         #Shut down motor procedure
         pass
 
     async def onOpen(c:moteus.Controller=None):
-        await c.set_rezero()
-
+        #await c.set_rezero()
+        pass
+    
     async def main():
-        c = moteus.Controller()
+        #c = moteus.Controller()
 
-        await onOpen(c=c)
+        transport = moteus_pi3hat.Pi3HatRouter(
+            servo_bus_map = {
+                1:[1],
+            },
+        )
+
+        servos = {
+            servo_id : moteus.Controller(id = servo_id, transport=transport)
+            for servo_id in [1]
+        }
+
+        await transport.cycle([x.make_stop() for x in servos.values()])
+        
+        #await onOpen(c=c)
 
         while not exitFlag:
-            state = await c.set_position(position=position, velocity=velocity, maximum_torque=torque ,query=True)
+            commands = [
+                servos[1].make_position(
+                    position=position,
+                    velocity=velocity,
+                    maximum_torque=torque,
+                    query=True)
+            ]
+
+
+            results = await transport.cycle(commands)
+            print(results[0])
+            #print(result.values[moteus.Register.POSITION] for result in results);
+
+            #state = await c.set_position(position=position, velocity=velocity, maximum_torque=torque ,query=True)
             #print(state)
             #print("Position:", state.values[moteus.Register.POSITION])
             #print()
             #print(position, state.values[moteus.Register.POSITION])
-            rospy.loginfo("Moving to pos: " + str(round(position, 3)) + ". At pos: " + str(round(state.values[moteus.Register.POSITION], 3)))
-            await asyncio.sleep(0.02)
+            #rospy.loginfo("Moving to pos: " + str(round(position, 3)) + ". At pos: " + str(round(state.values[moteus.Register.POSITION], 3)))
+            #await asyncio.sleep(0.02)
 
         await onClose()
 
