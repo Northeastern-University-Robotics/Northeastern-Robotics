@@ -33,5 +33,5 @@ class HallwayNav():
                 self.vel.linear.x = 1
             self.twist_pub.publish(self.vel)
             
-if __name__=='___main__':
+if __name__=='__main__':
     my_nav = HallwayNav()
