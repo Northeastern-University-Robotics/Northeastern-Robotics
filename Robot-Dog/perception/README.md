@@ -5,7 +5,7 @@ Access all use-cases of the perception team.
 ### Reader
 Common wrapper for reading images and video from the OAK-D camera using the DepthAI API.
 
-Detailed usage: 
+Detailed usage: [Check-Here](https://github.com/Northeastern-University-Robotics/Northeastern-Robotics/blob/Aditya/Robot-Dog/perception/reader/README.md)
 
 Note:
 1. Highly useful for the ROS sub-team.
