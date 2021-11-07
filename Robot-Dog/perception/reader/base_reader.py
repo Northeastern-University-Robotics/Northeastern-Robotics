@@ -38,6 +38,7 @@ class Reader:
     def _set_output_property(self) -> None:
         """Set the output property of the reader.
         """
+        self._out.setStreamName(self._stream)
         self._out.input.setBlocking(False)
         self._out.input.setQueueSize(1)
 
@@ -113,4 +114,12 @@ class Reader:
         Returns:
             numpy.ndarray: next frame from the reader.
         """
-        return self._device.getOutputQueue(name="Video", maxSize=1, blocking=False).get().getCVFrame()
+        return self._device.getOutputQueue(name=self._stream, maxSize=1, blocking=False).get().getCvFrame()
+
+    def read(self) -> numpy.ndarray:
+        """Get the next frame from the reader.
+
+        Returns:
+            numpy.ndarray: next frame from the reader.
+        """
+        return self.__next__()
