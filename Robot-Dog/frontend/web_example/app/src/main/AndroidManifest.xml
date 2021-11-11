@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Http_example"
         android:usesCleartextTraffic="true">
-        <activity
+        <!-- <activity
             android:name=".NewActivity"
             android:exported="true"
-            android:label="@string/title_activity_new" />
+            android:label="@string/title_activity_new" /> -->
         <activity
-            android:name=".MainActivity"
+            android:name=".TestActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
