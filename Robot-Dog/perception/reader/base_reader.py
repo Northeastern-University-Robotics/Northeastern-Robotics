@@ -5,7 +5,7 @@ import numpy
 class Reader:
     """Video reading wrapper around OAK-D using DepthAI API.
     """
-    def __init__(self, color=True, camera="rgb", resolution=1080, video_size=(1920, 1080)):
+    def __init__(self, color=True, camera="rgb", resolution=1080, video_size=(1920, 1080), fps=30):
         """Initiate a Reader class.
 
         Args:
@@ -17,6 +17,8 @@ class Reader:
                 resolution to read from the camera. [default: 1080]
             video_size : tuple
                 video size to read (width, height). [default: (1920, 1080)]
+            fps : int
+                frames per second. [default: 30]
         """
         self._device = None
         self._color = color
@@ -25,7 +27,7 @@ class Reader:
             self._cam = self._pipeline.create(dai.node.ColorCamera)
         self._out = self._pipeline.create(dai.node.XLinkOut)
         self._stream = "Video"
-        self._set_properties(camera, resolution, video_size)
+        self._set_properties(camera, resolution, video_size, fps)
         self._set_output_property()
         self._link()
         self._set_device()
@@ -42,7 +44,7 @@ class Reader:
         self._out.input.setBlocking(False)
         self._out.input.setQueueSize(1)
 
-    def _set_properties(self, camera, resolution, video_size) -> None:
+    def _set_properties(self, camera, resolution, video_size, fps) -> None:
         """Set the properties of the input stream.
 
         Args:
@@ -52,6 +54,8 @@ class Reader:
                 resolution to read from the camera. [default: 1080]
             video_size : tuple
                 video size to read (width, height). [default: (1920, 1080)]
+            fps : int
+                frames per second. [default: 30]
         """
         if camera == "rgb":
             self._cam.setBoardSocket(dai.CameraBoardSocket.RGB)
@@ -59,6 +63,8 @@ class Reader:
             self._cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
         # set video size
         self._cam.setVideoSize(video_size)
+        # set fps
+        self._cam.setFps(fps)
 
     @property
     def pipeline(self) -> dai.Pipeline:
@@ -123,3 +129,27 @@ class Reader:
             numpy.ndarray: next frame from the reader.
         """
         return self.__next__()
+
+    def get_fps(self) -> int:
+        """Get the FPS of the reader.
+
+        Returns:
+            int: FPS of the reader.
+        """
+        return self._cam.getFps()
+
+    def get_width(self) -> int:
+        """Get the width of the reader.
+
+        Returns:
+            int: width of the reader.
+        """
+        return self._cam.getVideoWidth()
+
+    def get_height(self) -> int:
+        """Get the height of the reader.
+
+        Returns:
+            int: height of the reader.
+        """
+        return self._cam.getVideoHeight()
