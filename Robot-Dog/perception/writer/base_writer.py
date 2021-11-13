@@ -9,7 +9,7 @@ class Writer:
     # opencv fourcc mappings
     _EXT_TO_FOURCC = {".avi": "DIVX", ".mkv": "X264", ".mp4": "mp4v"}
 
-    def __init__(self, path, fps, width, height, ext=".avi"):
+    def __init__(self, path, fps, width, height, ext=".mp4"):
         """Initiate Writer object
 
         Args:

@@ -1,15 +1,17 @@
+import os
 import cv2
+import pathlib
 from reader import Reader
 from writer import Writer
 
 
 if __name__ == '__main__':
-    path_of_output = "/Users/adityalohia/Library/Mobile Documents/com~apple~CloudDocs/Work/Robotics/Northeastern-Robotics/Robot-Dog/perception/test.mp4"
+    path_of_output = os.path.join(pathlib.Path().resolve(), "test.mp4")
     reader = Reader()
     writer = None
     while True:
         if writer is None:
-            writer = Writer(path_of_output, reader.get_fps(), reader.get_width(), reader.get_height(), ".mp4")
+            writer = Writer(path_of_output, reader.get_fps(), reader.get_width(), reader.get_height())
 
         frame = reader.read()
         writer.write(frame)
