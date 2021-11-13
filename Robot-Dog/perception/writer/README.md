@@ -1,3 +1,8 @@
+# Writer for DepthAI and OAK-D
+Common wrapper for writer images and video from the OAK-D camera using the DepthAI API to the disk.
+
+## Write Video
+```python
 import os
 import cv2
 import pathlib
@@ -22,3 +27,5 @@ if __name__ == '__main__':
 
     print("Exiting...")
     cv2.destroyAllWindows()
+
+```
