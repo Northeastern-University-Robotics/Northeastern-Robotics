@@ -67,6 +67,15 @@ class Reader:
         self._cam.setFps(fps)
 
     @property
+    def device(self):
+        """Get the device of the reader.
+
+        Returns:
+            dai.Device: device of the reader.
+        """
+        return self._device
+
+    @property
     def pipeline(self) -> dai.Pipeline:
         """Get the DepthAI pipeline object.
 
