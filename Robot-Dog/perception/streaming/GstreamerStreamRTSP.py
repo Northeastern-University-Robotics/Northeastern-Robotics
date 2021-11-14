@@ -9,8 +9,7 @@ class RtspSystem(GstRtspServer.RTSPMediaFactory):
     def __init__(self, **properties):
         super(RtspSystem, self).__init__(**properties)
         self.data = None
-        self.launch_string = 'appsrc name=source is-live=true block=true format=GST_FORMAT_TIME ! h265parse ' \
-                             '! rtph265pay name=pay0 config-interval=1 name=pay0 pt=96'
+        self.launch_string = 'appsrc name=source is-live=true block=true format=GST_FORMAT_TIME ! h265parse ! rtph265pay name=pay0 config-interval=1 name=pay0 pt=96'
 
     def send_data(self, data):
         self.data = data
@@ -19,23 +18,23 @@ class RtspSystem(GstRtspServer.RTSPMediaFactory):
         t = threading.Thread(target=self._thread_rtsp)
         t.start()
 
-    @staticmethod
-    def _thread_rtsp():
+    def _thread_rtsp(self):
         loop = GLib.MainLoop()
         loop.run()
 
-    def on_need_data(self, src):
+    def on_need_data(self, src, length):
         if self.data is not None:
-            ret_val = src.emit('push-buffer', Gst.Buffer.new_wrapped(self.data.tobytes()))
-            if ret_val != Gst.FlowReturn.OK:
-                print(ret_val)
+            retval = src.emit('push-buffer', Gst.Buffer.new_wrapped(self.data.tobytes()))
+            if retval != Gst.FlowReturn.OK:
+                print(retval)
 
     def do_create_element(self, url):
         return Gst.parse_launch(self.launch_string)
 
     def do_configure(self, rtsp_media):
-        app_src = rtsp_media.get_element().get_child_by_name('source')
-        app_src.connect('need-data', self.on_need_data)
+        self.number_frames = 0
+        appsrc = rtsp_media.get_element().get_child_by_name('source')
+        appsrc.connect('need-data', self.on_need_data)
 
 
 class RTSPServer(GstRtspServer.RTSPServer):

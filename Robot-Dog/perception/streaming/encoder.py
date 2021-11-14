@@ -25,15 +25,14 @@ class Encoder:
         self._color = color
         self._pipeline = dai.Pipeline()
         if self._color:
-            self._cam = self._pipeline.create(dai.node.ColorCamera)
+            self._cam = self._pipeline.createColorCamera()
             self._set_properties(camera, resolution, video_size, fps)
 
         self._encoder = self._pipeline.createVideoEncoder()
         self._encoder.setDefaultProfilePreset(video_size[0], video_size[1], fps,
                                               dai.VideoEncoderProperties.Profile.H265_MAIN)
         self._link_encoder()
-
-        self._out = self._pipeline.create(dai.node.XLinkOut)
+        self._out = self._pipeline.createXLinkOut()
         self._stream = "encoded"
         self._set_output_property()
         self._link()
@@ -53,8 +52,6 @@ class Encoder:
         """Set the output property of the reader.
         """
         self._out.setStreamName(self._stream)
-        self._out.input.setBlocking(False)
-        self._out.input.setQueueSize(1)
 
     def _set_properties(self, camera, resolution, video_size, fps) -> None:
         """Set the properties of the input stream.
@@ -69,13 +66,10 @@ class Encoder:
             fps : int
                 frames per second. [default: 30]
         """
-        if camera == "rgb":
-            self._cam.setBoardSocket(dai.CameraBoardSocket.RGB)
         if resolution == 1080:
             self._cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
-        # set video size
-        self._cam.setVideoSize(video_size)
-        # set fps
+        self._cam.setInterleaved(False)
+        self._cam.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
         self._cam.setFps(fps)
 
     def _set_device(self) -> None:
@@ -90,7 +84,7 @@ class Encoder:
             frame : dai.Frame
                 the next frame from the encoder.
         """
-        self._device.getOutputQueue(name=self._stream, maxSize=1, blocking=False)
+        return self._device.getOutputQueue(self._stream, maxSize=1, blocking=False)
 
     def read(self):
         """
