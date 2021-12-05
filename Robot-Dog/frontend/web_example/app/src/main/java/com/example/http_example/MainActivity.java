@@ -77,9 +77,14 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() { //onclick listener for submit button
             @Override
             public void onClick(View view) {
-                n = Integer.valueOf(oddEvenInput.getText().toString()); //convert the input to an integer
-                String url = "http://69.164.212.94:1500/isEven?n=" + n;
-                makeRequest(url, client);
+                try {
+                    n = Integer.valueOf(oddEvenInput.getText().toString()); //convert the input to an integer
+                    String url = "http://69.164.212.94:1500/isEven?n=" + n;
+                    makeRequest(url, client);
+                } catch (NumberFormatException e) {
+                    System.out.println("Submitted string is empty");
+                    System.out.println(e.toString());
+                }
             }
         });
 
@@ -132,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String url = "http://69.164.212.94:1500/joystick?leftAngle=" + leftAngle +
                         "&leftStrength=" + leftStrength + "&rightAngle=" + rightAngle +
-                        "&rightStrength=" + rightStrength;
+                        "&rightStrength=" + rightStrength + "&xCoord=" + xCoordinate +
+                        "&yCoord=" + yCoordinate;
                 makeRequest(url, client);
             }
         });
@@ -145,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Hello World");
                     String url = "http://69.164.212.94:1500/joystick?leftAngle=" + leftAngle +
                             "&leftStrength=" + leftStrength + "&rightAngle=" + rightAngle +
-                            "&rightStrength=" + rightStrength;
+                            "&rightStrength=" + rightStrength + "&xCoord=" + xCoordinate +
+                            "&yCoord=" + yCoordinate;
                     makeRequest(url, client);
                 }
             }
