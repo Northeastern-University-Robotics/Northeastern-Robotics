@@ -35,11 +35,10 @@ public class MainActivity extends AppCompatActivity {
     EditText oddEvenInput; //for the user input before converted to integer
     Button submitButton; //button object ... same name as xml file
     private Button jsonButton;
-    private Button newScreenButton;
     com.google.android.material.slider.Slider slider; //
     int s;
 
-    VideoView videoView;//video viewer thingy
+    VideoView videoView;//video viewer
 
     private int leftAngle;
     private int leftStrength;
@@ -109,17 +108,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.newScreenButton = findViewById(R.id.navigate);
-
-        this.newScreenButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v)
-            {
-                // Create intent to start NewActivity from MainActivity
-                Intent intent = new Intent(MainActivity.this, NewActivity.class);
-                startActivity(intent);
-            }
-        });
         slider.addOnChangeListener(new com.google.android.material.slider.Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull com.google.android.material.slider.Slider slider, float value, boolean fromUser) {
@@ -128,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 makeRequest(url, client);
             }
         });
-
 
         jsonButton = (Button) findViewById(R.id.jsonButton);
         // Make JSON request to server

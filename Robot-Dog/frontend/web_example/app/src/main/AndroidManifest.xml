@@ -12,10 +12,6 @@
         android:theme="@style/Theme.Http_example"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".NewActivity"
-            android:exported="true"
-            android:label="@string/title_activity_new" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
