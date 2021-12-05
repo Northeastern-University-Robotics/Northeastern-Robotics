@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     EditText oddEvenInput; //for the user input before converted to integer
     Button submitButton; //button object ... same name as xml file
     private Button jsonButton;
-    com.google.android.material.slider.Slider slider; //
+    com.google.android.material.slider.Slider slider;
     int s;
 
     VideoView videoView;//video viewer
@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         mTextViewResult.setText(e.toString());
-
                     }
                 });
             }
@@ -186,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mTextViewResult.setText(myResponse);
-
                         }
                     });
                 } else {
@@ -194,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mTextViewResult.setText("else");
-
                         }
                     });
                 }

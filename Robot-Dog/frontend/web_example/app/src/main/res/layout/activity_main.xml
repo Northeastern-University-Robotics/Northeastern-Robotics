@@ -8,16 +8,15 @@
 
     <include layout="@layout/my_video_background" />
 
-<TextView
+    <TextView
         android:id="@+id/text_view_result"
         android:layout_width="wrap_content"
-        android:layout_height="5dp"
-        android:text="Hello World!"
+        android:layout_height="20dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        />
+        android:layout_weight="1"
+        android:text="Hello World!" />
 
     <EditText
         android:id="@+id/oddEvenInput"
@@ -31,23 +30,28 @@
         android:layout_marginTop="1dp"
         android:layout_marginBottom="5dp"
         />
+
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
-        android:layout_height="5dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="Submit"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="5dp"/>
-
-    <com.google.android.material.slider.Slider
-        android:id="@+id/slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:text="Submit" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="50dp"
         android:layout_weight="1"
         android:value="50.0"
         android:valueFrom="0.0"
@@ -121,20 +125,16 @@
         android:id="@+id/jsonButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="120dp"
         android:text="Make JSON Request"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/navigate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Navigate to a different page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
